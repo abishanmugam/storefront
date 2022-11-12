@@ -1,3 +1,15 @@
-# https://www.robotstxt.org/robotstxt.html
+# *
 User-agent: *
-Disallow:
+Allow: /
+
+# *
+User-agent: *
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account/*
+
+# Host
+Host: https://localhost:3001
+
+# Sitemaps
+Sitemap: https://localhost:3001/sitemap.xml

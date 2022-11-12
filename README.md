@@ -1,70 +1,195 @@
-# Getting Started with Create React App
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsaleor%2Freact-storefront&project-name=my-react-storefront&repo-name=my-react-storefront)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Storefront
 
-## Available Scripts
+![alt text](https://og-image.vercel.app/React%20Storefront.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg&images=https%3A%2F%2Fsaleor.io%2Fstatic%2Flogo-ad1b99aa7c6f5acf58a61640af760cfd.svg)
 
-In the project directory, you can run:
+<p align="center">
+  <a href="https://reactstorefront.vercel.app">Live demo</a> / <a href="https://githubbox.com/saleor/react-storefront">Explore and run the code in CodeSandbox</a>
+</p>
 
-### `npm start`
+React Storefront is an open-source frontend e-commerce platform from the [Saleor](https://saleor.io) team.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Next.js
+- TypeScript
+- GraphQL with Apollo Client
+- Tailwind CSS
+- [Saleor Checkout](https://github.com/saleor/saleor-checkout)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Motivation
 
-### `npm test`
+**modern & fast**:
+Project is focusing on best practices for e-commerce, like: SSR & ISR, image optimization.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**easily customizable**:
+TailwindCSS can be easily extended and tweaked, or completely changed to your favorite css solution.
 
-### `npm run build`
+**works out-of-the-box**:
+Pre configured tools for DX.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Supercharge your development with our CLI tool and free developer account at [Saleor Cloud](https://cloud.saleor.io/). To download and install Saleor CLI, run the following command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npm i -g saleor@latest
+```
 
-### `npm run eject`
+Set up your local storefront development environment by running the `storefront create` command. It will take you through the process of creating a new Saleor API instance (or choosing an existing one) and connecting it to your freshly cloned local storefront setup:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+saleor storefront create
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you don't want to customize available options, you can also spawn a fully functional local storefront development environment, using`--demo` switch:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+saleor storefront create --demo
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[Learn more about Saleor CLI](https://docs.saleor.io/docs/3.x/cli)
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Please note: this project use the [pnpm](https://pnpm.io/) package manager. To install it, run:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm install -g pnpm
+```
 
-### Code Splitting
+Install dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+pnpm i
+```
 
-### Analyzing the Bundle Size
+Start the dev server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+pnpm dev
+```
 
-### Making a Progressive Web App
+Storefront can be now accessed at http://localhost:3001/.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Development
 
-### Advanced Configuration
+### Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Instructions how to configure the application (e.g. change the graphql API URL) can be found [here](docs/configuration.md).
 
-### Deployment
+### GraphQL queries
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Graphql queries are located under the `./graphql`. We strongly encourage use of [fragments](https://graphql.org/learn/queries/#fragments), which minimizes code duplication and plays nicely with the TypeScript, during transformation of incoming data.
 
-### `npm run build` fails to minify
+Our client of choice is [Apollo](https://www.apollographql.com/docs/react/), which provides excellent cache and features out of the box. To get fully typed requests and responses, [GraphQL Code Generator](https://www.graphql-code-generator.com/) transforms all `.graphql` files into ready to use hooks. Generated code is located at `./saleor/api.tsx` file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+API endpoint can be configured via `.env` file as described in [docs](docs/configuration.md).
+
+#### Workflow
+
+- Modify or create GraphQL file. For example, new query at `./graphql/queries/FeaturedProducts.graphql`
+- Run `pnpm generate` command
+- New query will be added to the `./saleor/api.tsx` file
+- Import generated hook (`import { useFeaturedProductsQuery } from "@/saleor/api";`) in your component code
+
+Script will start the [GraphQL Code Generator](https://www.graphql-code-generator.com/) in the watch mode, so changes in the queries will be automatically updated.
+
+### React and Next.js code structure
+
+When creating new components, please follow the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components/).
+
+Code for the payment gateways can be found at `./components/checkout/payments`. At the moment we support [Saleor test gateway](https://docs.saleor.io/docs/3.0/developer/available-plugins/dummy-credit-card) and basic flow for Stripe.
+
+#### Routing and urls
+
+Project use [file based routing](https://nextjs.org/docs/routing/introduction). Available routes can be found at `./pages`. Dynamic routes (for example `./pages/product/[slug].tsx`) are generated at build time based on [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation).
+
+To ensure, that Link components use only the existing URLs with required arguments, we use [pathpida](https://github.com/aspida/pathpida). It is used to automatically generate the `./lib/$path.ts` file with all available routes. File should not be updated manually, instead run:
+
+```bash
+pnpm paths
+```
+
+Since routes require additional arguments with current locale and channel, you should use `usePaths` hook which will automatically add those. Let's create example component with link to the product page:
+
+```tsx
+import Link from "next/link";
+import { usePaths } from "@/lib/paths";
+
+export const ProductLinkComponent = () => {
+  const paths = usePaths();
+  return (
+    <Link href={paths.products._slug(line?.variant?.product?.slug).$url()}>
+      <a>Product link</a>
+    </Link>
+  );
+};
+```
+
+### Saleor Checkout
+React Storefront uses the new [Saleor Checkout](https://github.com/saleor/saleor-checkout) for checkout and payments. The setup is as easy as:
+1. Deploy Saleor Checkout
+2. Set  the `NEXT_PUBLIC_CHECKOUT_URL` environment variable with Saleor Checkout URL
+
+### Code style
+
+Before committing the code, Git pre-hooks will check staged changes for following the code styles. If you would like to format the code by yourself, run the command:
+
+```bash
+pnpm lint
+```
+
+## Other tools
+
+### Debugging using VS Code
+
+The repository contains ready to use VS Code debugger configuration (`.vscode/launch.json`).
+
+Start server in debug mode
+
+```bash
+pnpm debug
+```
+
+Add [breakpoints](https://code.visualstudio.com/docs/editor/debugging#_breakpoints), and start debugging session in your editor.
+
+### VS Code GraphQL Extension
+
+GraphQL extension for VSCode adds syntax highlighting, validation, and language features like go to definition, hover information and autocompletion for graphql projects. This extension also works with queries annotated with gql tag.
+
+VS Marketplace [link](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql)
+
+### Bundle metrics
+
+If you want to check how your changes impact page size, use command:
+
+```bash
+pnpm analyze-build
+```
+
+After the build, report will open in your browser.
+
+## Deployment
+
+### Vercel & Netlify
+
+This application is optimized for deployments on Vercel and Netlify. You can use the following deploy buttons
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsaleor%2Freact-storefront&project-name=my-react-storefront&repo-name=my-react-storefront)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/saleor/react-storefront)
+
+or, configure it directly in the respective cloud provider.
+
+### Heroku
+
+For Heroku, you need to specify a LTS version of Node.js in your `package.json` explicitly. Add the following snippet in `package.json`:
+
+```json
+"engines": {
+  "node": ">=14 <17",
+  "npm": ">=6.11.0 <8"
+}
+```
+
+We don't add this in this codebase as we prefer to target the latest Node.js version.
